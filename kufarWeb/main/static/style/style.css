@@ -1,0 +1,202 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e6eeff;  /* Цвет фона изменен */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Обеспечивает, что тело страницы будет растягиваться на всю высоту экрана */
+}
+.main-content {
+    flex-grow: 1; /* Это позволяет контенту занимать все оставшееся пространство */
+}
+/* Шапка */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #ddd;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+/* Кнопки в шапке */
+.auth-links {
+    display: flex;
+    gap: 15px; /* увеличил пространство между кнопками */
+}
+
+/* Общие стили для кнопок */
+.btn-outline {
+    border: 2px solid transparent;
+    border-radius: 25px; /* увеличен радиус для округленности */
+    padding: 12px 25px; /* увеличены размеры кнопок */
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Кнопка "Вход" (синяя) */
+.login-btn {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    border: 2px solid transparent;
+    border-radius: 25px; /* увеличен радиус для округленности */
+    padding: 12px 25px; /* увеличены размеры кнопок */
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Кнопки "Выйти", "Подать объявление", "Личный кабинет", "Модерация" */
+.submit-ad-btn,
+.profile-btn,
+.logout-btn,
+.moderation-btn {
+    background-color: #ff66b2;
+    color: white;
+    border-color: #ff66b2;
+    border: 2px solid transparent;
+    border-radius: 25px; /* увеличен радиус для округленности */
+    padding: 12px 25px; /* увеличены размеры кнопок */
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.submit-ad-btn:hover,
+.profile-btn:hover,
+.logout-btn:hover,
+.moderation-btn:hover {
+    background-color: #ff3385;
+    border-color: #ff3385;
+}
+
+/* Фильтры */
+.filter-container {
+    background-color: #ffffff;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* Использовать Flexbox */
+    justify-content: space-between; /* Распределить элементы по горизонтали */
+    align-items: center; /* Центрировать по вертикали */
+}
+
+.filter-container form {
+    display: flex; /* Использовать Flexbox для формы */
+    align-items: center; /* Центрировать элементы по вертикали */
+    gap: 15px; /* Отступ между полями */
+}
+
+.filter-container label {
+    font-weight: bold;
+}
+
+.filter-container select,
+.filter-container input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Кнопка применения фильтра */
+.filter-container button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px; /* увеличен радиус для округленности */
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.filter-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Сбросить фильтр */
+.filter-container a button {
+    padding: 12px;
+    background-color: #ff66b2;
+    color: white;
+    border: none;
+    border-radius: 25px; /* увеличен радиус для округленности */
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.filter-container a button:hover {
+    background-color: #ff3385;
+}
+
+/* Список объявлений */
+.ads-container {
+    padding: 20px;
+}
+
+.ads-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.ad-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.ad-image img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.ad-info {
+    padding: 15px;
+}
+
+.ad-info h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.ad-info p {
+    color: #28a745;
+}
+
+
+/* Футер */
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #e6eeff;
+    border-top: 1px solid #ddd;
+    width: 100%;
+    position: relative;
+    margin-top: auto; /* Этот стиль прижимает футер вниз */
+}

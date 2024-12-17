@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подробнее</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .ad-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .ad-container img {
+            max-width: 500px;
+            max-height: 400px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .ad-container p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ad-container">
+    <h1>{{ ad.title }}</h1>
+    <div>
+        {% if ad.image %}
+            <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+        {% else %}
+            <p>Изображение отсутствует</p>
+        {% endif %}
+    </div>
+    <p><strong>Цена:</strong> {{ ad.price }} BYN</p>
+    <p><strong>Описание:</strong> {{ ad.description }}</p>
+    <p><strong><span class="field-label">Категория:</span></strong> {{ ad.category }}</p>
+    <p><strong><span class="field-label">Телефон:</span></strong> {{ ad.phone_number }}</p>
+    <p><strong><span class="field-label">Область:</span></strong> {{ ad.region }}</p>
+    <p><strong><span class="field-label">Город:</span></strong> {{ ad.city }}</p>
+
+     <!-- Добавляем имя и фамилию пользователя -->
+    <p><strong><span class="field-label">Пользователь:</span></strong> {{ ad.user.first_name }} {{ ad.user.last_name }}</p>
+
+    <a class="back-link" href="{% url 'home' %}">Вернуться на главную</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <style>
+        /* Общие стили */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6eeff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #ff66b2;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .ads-list {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .ad-card {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .ad-card:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .ad-card a {
+            display: flex;
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+        }
+
+        .ad-image {
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+
+        .ad-image img {
+            border-radius: 8px;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .ad-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ad-info h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .ad-info p {
+            margin: 0;
+            font-size: 16px;
+            color: #666;
+        }
+
+         .ad-info .user-name {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .delete-button {
+            margin-left: 15px;
+            padding: 10px 15px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-button:hover {
+            background-color: #ff1a1a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Личный кабинет</h1>
+    <p class="user-name"><strong>Пользователь:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+    <h2>Ваши объявления</h2>
+
+    <ul class="ads-list">
+        {% for ad in ads %}
+        <li class="ad-card">
+            <a href="{% url 'ad_detail' ad.id %}" class="ad-link">
+                <div class="ad-image">
+                    {% if ad.image %}
+                    <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+                    {% else %}
+                    <p>Изображение отсутствует</p>
+                    {% endif %}
+                </div>
+                <div class="ad-info">
+                    <h2>{{ ad.title }}</h2>
+                    <p>Цена: {{ ad.price }} BYN</p>
+                </div>
+            </a>
+            <form action="{% url 'delete_ad' ad.id %}" method="post" style="margin: 0;">
+                {% csrf_token %}
+                <button type="submit" class="delete-button">Удалить</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+<a class="back-link" href="{% url 'home' %}">Вернуться на главную</a>
+
+</body>
+
+</html>

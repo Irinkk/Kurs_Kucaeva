@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Создать объявление</title>
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <style>
+        /* Общие стили */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6eeff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .ad-form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .ad-form-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .ad-form-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .ad-form-container input[type="text"],
+        .ad-form-container input[type="file"],
+        .ad-form-container input[type="number"],
+        .ad-form-container select,
+        .ad-form-container textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .ad-form-container textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .ad-form-container button {
+            padding: 12px;
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .ad-form-container button:hover {
+            background-color: #ff3385;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-form-container">
+        <h2>Создать объявление</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+    <label >Заголовок объявления</label>
+    {{ form.title }}  <!-- Поле для заголовка -->
+
+    <label >Описание</label>
+    {{ form.description }}  <!-- Поле для описания -->
+
+    <label >Номер телефона</label>
+    {{ form.phone_number }}  <!-- Поле для номера телефона -->
+
+    <label >Область</label>
+    {{ form.region }}  <!-- Поле для области -->
+
+    <label >Город</label>
+    {{ form.city }}  <!-- Поле для города -->
+
+    <label>Категория</label>
+        {{ form.category }}  <!-- Это должно отобразить выпадающий список -->
+
+
+    <label ">Цена</label>
+    {{ form.price }}  <!-- Поле для цены -->
+
+    <label >Фото</label>
+    {{ form.image }}  <!-- Поле для изображения -->
+
+    <button type="submit">Создать объявление</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+</head>
+
+<body>
+    <!-- Шапка с кнопками -->
+   <div class="header border-bottom box-shadow">
+      <div class="col-md-3" style="display: flex; align-items: center;">
+            <a href="/" class="navbar-brand">
+                <img src="{% static 'images/logo3.png' %}" alt="Логотип" style="max-height: 50px;">
+            </a>
+            <h1 style="color: #4d4dff; margin-left: 10px;">MyMarket</h1>
+        </div>
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <form method="get" action="{% url 'logout' %}">
+                    <button type="submit" class="btn-outline-success logout-btn">Выйти</button>
+                </form>
+                <form method="get" action="{% url 'create_ad' %}">
+                    <button type="submit" class="btn-outline-success submit-ad-btn">Подать объявление</button>
+                </form>
+                <form method="get" action="{% url 'user_profile' %}">
+                    <button type="submit" class="profile-btn">Личный кабинет</button>
+                </form>
+                {% if user.is_moderator %}
+                    <form method="get" action="{% url 'moderation' %}">
+                        <button type="submit" class="moderation-btn">Модерация</button>
+                    </form>
+                {% endif %}
+            {% else %}
+                <form method="get" action="{% url 'login' %}">
+                    <button type="submit" class="btn-outline-success login-btn">Вход</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Фильтры и объявления -->
+    <div class="content-container">
+        <!-- Форма для фильтрации -->
+        <div class="filter-container">
+            <form method="GET">
+                <div>
+                    <label for="category" style="color: #4d4dff;">Категория:</label>
+                    <select name="category" id="category" class="form-control">
+                        <option value="">Все</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {% if category.id == request.GET.category %}selected{% endif %}>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="min_price" style="color: #4d4dff;">Минимальная цена:</label>
+                    <input type="number" name="min_price" id="min_price" class="form-control" value="{{ request.GET.min_price }}">
+                </div>
+                <div>
+                    <label for="max_price" style="color: #4d4dff;">Максимальная цена:</label>
+                    <input type="number" name="max_price" id="max_price" class="form-control" value="{{ request.GET.max_price }}">
+                </div>
+                <div>
+                    <label for="search" style="color: #4d4dff;" >Поиск:</label>
+                    <input type="text" name="search" id="search" class="form-control" value="{{ request.GET.search }}" placeholder="Поиск по заголовку и описанию">
+                </div>
+                <button type="submit" class="btn-outline-success search-button">Применить фильтр</button>
+                <a href="{% url 'home' %}">
+                    <button type="button" class="btn-outline-success">Сбросить фильтр</button>
+                </a>
+            </form>
+        </div>
+
+       <!-- Список объявлений -->
+    <div class="ads-container">
+        <h1 class="header-description" style="color: #ff66b2;">Список объявлений</h1>
+        <ul class="ads-list">
+            {% for ad in ads %}
+            <li class="ad-card box-shadow">
+                <a href="{% url 'ad_detail' ad.id %}" class="ad-link" style="text-decoration: none;">
+                    <div class="ad-image">
+                        {% if ad.image %}
+                        <img src="{{ ad.image.url }}" alt="{{ ad.title }}" width="150" height="150">
+                        {% else %}
+                        <p>Изображение отсутствует</p>
+                        {% endif %}
+                    </div>
+                    <div class="ad-info">
+                        <h2 class="ad-title" style="color: #0066cc; text-decoration: none;">{{ ad.title }}</h2>
+                        <p class="ad-price" style="color: #ff66b2; text-decoration: none;">Цена: {{ ad.price }} BYN</p>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+    <!-- Футер -->
+    <footer class="footer border-top">
+        <p>© 2024 MyMarket. Все права защищены.</p>
+    </footer>
+</body>
+
+</html>
